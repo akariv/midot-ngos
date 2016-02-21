@@ -135,7 +135,15 @@ angular.module('midotApp')
         resizeFn();
         $(window).resize(resizeFn);
       });
-      that.volumeSlider = new Slider('#volume2013GranularSlider');
+      that.volumeSlider = new Slider('#volume2013GranularSlider',
+        {
+          id:'volume2013GranularSlider',
+          min:0,
+          max:8,
+          range:true,
+          ticks_snap_bounds:true,
+          tooltip:'hide'
+        });
       that.volumeSlider.on('slide', function() {
         var values = that.volumeSlider.getValue();
         var x = {

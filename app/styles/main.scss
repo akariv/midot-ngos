@@ -195,18 +195,6 @@ body {
     }
   }
 
-  //.excel, .excel.open {
-  //  //display: inline-block;
-  //  //position:relative;
-  //  //width:18px;
-  //  //height:18px;
-  //  padding-left:40px;
-  //  background-image: url("../images/exportExcel.png") !important;
-  //  background-position: left center;
-  //  background-repeat: no-repeat;
-  //  background-color: #cceaf6;
-  //}
-
   .searchResults {
     .searchResultsBtn {
       background-image: url("../images/exportExcel.png") !important;
@@ -263,7 +251,7 @@ body {
 
   }
 
-  input {
+  input[type=text] {
     background-color:#cceaf6;
     color: #323232;
     width:220px !important;
