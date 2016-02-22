@@ -468,18 +468,28 @@ select {
   color: #323232;
 }
 
-.hasadna-logo {
+.hasadna-logo, .bluedot-logo {
   position:fixed;
   left: 0px;
-  bottom: 0px;
   margin:2px;
-  background-image: url("../images/hasadna-logo-light340.png");
   background-position: left center;
   background-repeat: no-repeat;
-  padding-left:160px;
+  width:220px;
+  height:24px;
   font-size:12px;
   color:#323232;
   background-color: #fff;
   opacity: 0.8;
+  line-height: 27px;
   cursor:pointer;
+}
+
+.hasadna-logo {
+  bottom: 0px;
+  background-image: url("../images/hasadna-logo-light340.png");
+}
+
+.bluedot-logo {
+  bottom: 26px;
+  background-image: url("../images/bluedot.png");
 }
