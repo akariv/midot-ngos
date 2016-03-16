@@ -292,4 +292,8 @@ angular.module('midotApp')
     this.hasadna = function() {
       $window.open('http://www.hasadna.org.il','_blank');
     };
+
+    this.bluedot = function() {
+      $window.open('http://www.bluedot360.co.il','_blank');
+    };
   });
