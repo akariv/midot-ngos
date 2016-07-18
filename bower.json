@@ -37,5 +37,10 @@
         "dist/js/bootstrap.js"
       ]
     }
+  },
+  "resolutions": {
+    "angular": "^1.4.0",
+    "d3": "~3.5.14",
+    "spin.js": "~2.3.2"
   }
 }

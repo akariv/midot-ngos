@@ -54,7 +54,7 @@ angular.module('midotApp')
         f = $filter('fieldFilter')(f,['~name', '~alias'],$scope.orgNameQuery);
       }
       if ( $scope.minVolume >0 || $scope.maxVolume < 750000000 ) {
-        f = $filter('fieldRangeFilter')(f, 'volume_2013', $scope.minVolume, $scope.maxVolume);
+        f = $filter('fieldRangeFilter')(f, 'volume', $scope.minVolume, $scope.maxVolume);
       }
       if ( $scope.selectedSector && $scope.selectedSector.length > 0  ) {
         f = $filter('fieldFilter')(f,'sector',$scope.selectedSector);
@@ -70,8 +70,8 @@ angular.module('midotApp')
       if ( !$scope.selectedSector ) {
         stats['סיווג ענפי'] = calcStats(f, 'sector');
       }
-      if ( !$scope.selectedVolume2013Granular ) {
-        stats['מחזור כספי'] = calcStats(f, 'volume_2013_granular');
+      if ( !$scope.selectedVolumeGranular ) {
+        stats['מחזור כספי'] = calcStats(f, 'volume_granular');
       }
       if ( $scope.selectedSector && !$scope.selectedOperationField ) {
         stats['תחום פעולה'] = calcStats(f, 'operation_field');
@@ -123,6 +123,10 @@ angular.module('midotApp')
       $scope.selectedRow = $scope.selectedRow === row ? null : row;
     };
 
+    //this.selectRowFinanceYear = function(row) {
+    //  _.extend(row, row.finance[row.financeYear]);
+    //};
+
     $(function() {
       $('[data-clampedwidth]').each(function () {
         var elem = $(this);
@@ -135,9 +139,9 @@ angular.module('midotApp')
         resizeFn();
         $(window).resize(resizeFn);
       });
-      that.volumeSlider = new Slider('#volume2013GranularSlider',
+      that.volumeSlider = new Slider('#volumeGranularSlider',
         {
-          id:'volume2013GranularSlider',
+          id:'volumeGranularSlider',
           min:0,
           max:8,
           range:true,

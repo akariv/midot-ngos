@@ -16,10 +16,11 @@ angular.module('midotApp')
         resolve(JSON.parse($window.localStorage.data));
       } else {
         Tabletop.then(function(t) {
+          var sheet = 'amutot-with-2014'
           var data = {
-            amutot: t[0].amutot.elements.slice(1),
-            columns: t[0].amutot.column_names,
-            headers: t[0].amutot.elements[0]
+            amutot: t[0][sheet].elements.slice(1),
+            columns: t[0][sheet].column_names,
+            headers: t[0][sheet].elements[0]
             //,
             //subjects: _.object(_.map(t[0].subjects.elements,function(d){
             //  return [d.subject.trim(), d.text];
@@ -28,6 +29,7 @@ angular.module('midotApp')
           data.headers = _.map(t[0].amutot.column_names, function(h) {
             return data.headers[h];
           });
+          console.log(t);
           data.amutot = _.map(data.amutot, function(row) {
             row = _.mapObject(row, function(val) {
               val = val.trim();
@@ -42,6 +44,28 @@ angular.module('midotApp')
               }
               return val;
             });
+            var maxYear=2013;
+            row.finance = {};
+            row = _.mapObject(row, function(val, key) {
+              var m = key.match(/_(20[0-9][0-9])$/);
+              if (m) {
+                var year = m[1];
+                if (val) {
+                  if (year>maxYear) {
+                    maxYear = year;
+                  }
+                  var prefix = key.slice(0, -5);
+                  if (!row.finance[year]) {
+                    row.finance[year] = {};
+                  }
+                  row.finance[year][prefix] = val;
+                }
+              }
+              return val;
+            });
+            row.financeYears = _.sortBy(_.keys(row.finance));
+            row.financeYear = maxYear;
+            _.extend(row, row.finance[maxYear]);
             row.age = parseInt(row.age);
             row.found_year = parseInt(row.found_year);
             row.reg_year = parseInt(row.reg_year);

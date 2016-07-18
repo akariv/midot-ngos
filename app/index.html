@@ -97,8 +97,8 @@
 
               {{ main.minVolumeLabel }} - {{ main.maxVolumeLabel }} ₪
             </div>
-            <input id="volume2013GranularSlider"
-                   data-slider-id='volume2013GranularSlider'
+            <input id="volumeGranularSlider"
+                   data-slider-id='volumeGranularSlider'
                    type="text"
                    class="span2"
                    data-slider-min="0"
@@ -148,7 +148,7 @@
             <thead>
               <th>שם הארגון</th>
               <th>שנת ייסוד</th>
-              <th>מחזור כספי 2013 (₪)</th>
+              <th>מחזור כספי (₪)</th>
               <th>איזור פעילות</th>
               <th>סיווג ענפי</th>
               <th>תחומי פעילות</th>
@@ -164,7 +164,7 @@
                 <td>
                   {{ row.year }}
                 </td>
-                <td>{{ row.volume_2013 | number}}</td>
+                <td>{{ row.volume | number}}</td>
                 <td>{{ row.location_area }}</td>
                 <td>{{ row.sector }}</td>
                 <td>
@@ -195,17 +195,26 @@
                           <p ng-if="row.ceo"><strong>מנכ״ל: </strong>{{ row.ceo  }}</p>
                         </span>
                         <span class="col-sm-8">
-                          <h4>פיננסי</h4>
-                          <p ng-if="row.volume_2013"><strong>מחזור כספי 2013 (₪): </strong>{{row.volume_2013 | number }}</p>
+                          <h4>פיננסי
+                            <small>נתוני
+                              <span ng-if="row.financeYears.length == 1">{{row.financeYear}}</span>
+                              <span ng-if="row.financeYears.length == 0">2013</span>
+                            </small>
+                            <select ng-options="item for item in row.financeYears"
+                                    ng-model="row.financeYear"
+                                    ng-if="row.financeYears.length > 1">
+                            </select>
+                          </h4>
+                          <p ng-if="row.finance[row.financeYear].volume"><strong>מחזור כספי (₪): </strong>{{row.finance[row.financeYear].volume | number }}</p>
                           <div class="row">
                             <div class="col-sm-6">
-                              <p ng-if="row.income_gov_pct"><strong>שיעור הכנסות מרשויות: </strong>{{row.income_gov_pct}}%</p>
-                              <p ng-if="row.income_phil_pct"><strong>שיעור הכנסות מפילנתרופיה:</strong>{{row.income_phil_pct}}%</p>
-                              <p ng-if="row.income_equiv_pct"><strong>שיעור הכנסות בשווי ערך: </strong>{{row.income_equiv_pct}}%</p>
-                              <p ng-if="row.income_internal_pct"><strong>שיעור הכנסות עצמיות: </strong>{{row.income_internal_pct}}%</p>
+                              <p ng-if="row.finance[row.financeYear].income_gov_pct"><strong>שיעור הכנסות מרשויות: </strong>{{row.finance[row.financeYear].income_gov_pct}}%</p>
+                              <p ng-if="row.finance[row.financeYear].income_phil_pct"><strong>שיעור הכנסות מפילנתרופיה:</strong>{{row.finance[row.financeYear].income_phil_pct}}%</p>
+                              <p ng-if="row.finance[row.financeYear].income_equiv_pct"><strong>שיעור הכנסות בשווי ערך: </strong>{{row.finance[row.financeYear].income_equiv_pct}}%</p>
+                              <p ng-if="row.finance[row.financeYear].income_internal_pct"><strong>שיעור הכנסות עצמיות: </strong>{{row.finance[row.financeYear].income_internal_pct}}%</p>
                             </div>
                             <div class="col-sm-6">
-                              <p ng-if="row.spending_admin_pct"><strong>שיעור הוצאות הנה"כ, כולל גיוס משאבים: </strong>{{row.spending_admin_pct}}%</p>
+                              <p ng-if="row.finance[row.financeYear].spending_admin_pct"><strong>שיעור הוצאות הנה"כ, כולל גיוס משאבים: </strong>{{row.finance[row.financeYear].spending_admin_pct}}%</p>
                             </div>
                           </div>
                         </span>

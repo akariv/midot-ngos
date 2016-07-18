@@ -12,7 +12,7 @@ angular.module('midotApp')
   .filter('unique', function () {
     function sortkey(x,field) {
       var ret = x[field];
-      if ( field !== 'volume_2013_granular' ) {
+      if ( field !== 'volume_granular' ) {
         return ret;
       }
       if (ret.startsWith('בין')) {
