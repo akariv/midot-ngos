@@ -123,6 +123,13 @@ angular.module('midotApp')
       $scope.selectedRow = $scope.selectedRow === row ? null : row;
     };
 
+    this.flash = function() {
+      $('.flash.active').toggleClass('active',false);
+      window.setTimeout(function() {
+        $('.flash').toggleClass('active',true);
+      }, 100);
+    };
+
     //this.selectRowFinanceYear = function(row) {
     //  _.extend(row, row.finance[row.financeYear]);
     //};

@@ -16,7 +16,7 @@ angular.module('midotApp')
         resolve(JSON.parse($window.localStorage.data));
       } else {
         Tabletop.then(function(t) {
-          var sheet = 'amutot-with-2014'
+          var sheet = 'amutot-with-2014';
           var data = {
             amutot: t[0][sheet].elements.slice(1),
             columns: t[0][sheet].column_names,
@@ -64,7 +64,7 @@ angular.module('midotApp')
               return val;
             });
             row.financeYears = _.sortBy(_.keys(row.finance));
-            row.financeYear = maxYear;
+            row.financeYear = ""+maxYear;
             _.extend(row, row.finance[maxYear]);
             row.age = parseInt(row.age);
             row.found_year = parseInt(row.found_year);

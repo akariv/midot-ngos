@@ -116,6 +116,18 @@ body {
   min-height: 100px;
 }
 
+@keyframes flash {
+  0% {
+    background-color: yellow;
+  }
+  10% {
+    background-color: yellow;
+  }
+  100% {
+    background-color: #cceaf6;
+  }
+}
+
 .right-col {
   width:240px;
   padding:0px;
@@ -454,6 +466,7 @@ body {
         select {
           font-size:12px;
           color: #033c69;
+          background-color: #e5f8ff;
         }
       }
 
@@ -471,6 +484,12 @@ body {
         margin-bottom: 1px;
       }
 
+      .flash.active {
+        animation-duration: 0.8s;
+        animation-name: flash;
+      }
+
+
     }
   }
 }
@@ -481,8 +500,6 @@ select {
 }
 
 .hasadna-logo, .bluedot-logo {
-  position:fixed;
-  left: 0px;
   margin:2px;
   background-position: left center;
   background-repeat: no-repeat;
@@ -497,11 +514,25 @@ select {
 }
 
 .hasadna-logo {
-  bottom: 0px;
+  margin-top: 20px;
   background-image: url("../images/hasadna-logo-light340.png");
 }
 
 .bluedot-logo {
-  bottom: 26px;
   background-image: url("../images/bluedot.png");
+}
+
+@media (min-width: 1396px) {
+  .hasadna-logo, .bluedot-logo {
+    position:fixed;
+    left: 0px;
+  }
+
+  .hasadna-logo {
+    bottom: 0px;
+  }
+
+  .bluedot-logo {
+    bottom: 26px;
+  }
 }

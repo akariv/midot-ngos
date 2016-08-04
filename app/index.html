@@ -127,6 +127,8 @@
             </div>
           </div-->
           <img src="images/midotMigdal.jpg">
+          <div class="hasadna-logo" ng-click="main.hasadna()">פיתוח האתר:</div>
+          <div class="bluedot-logo" ng-click="main.bluedot()">מיתוג, עיצוב, UX: </div>
         </div>
         <div class="col-lg-9 left-col" dw-loading="data" dw-loading-options="{text: 'טוען נתונים...'}">
           <div>
@@ -197,24 +199,41 @@
                         <span class="col-sm-8">
                           <h4>פיננסי
                             <small>נתוני
-                              <span ng-if="row.financeYears.length == 1">{{row.financeYear}}</span>
                               <span ng-if="row.financeYears.length == 0">2013</span>
                             </small>
                             <select ng-options="item for item in row.financeYears"
                                     ng-model="row.financeYear"
-                                    ng-if="row.financeYears.length > 1">
+                                    ng-if="row.financeYears.length > 0"
+                                    ng-change="main.flash()">
                             </select>
                           </h4>
-                          <p ng-if="row.finance[row.financeYear].volume"><strong>מחזור כספי (₪): </strong>{{row.finance[row.financeYear].volume | number }}</p>
+                          <p ng-if="row.finance[row.financeYear].volume"><strong>מחזור כספי (₪): </strong>
+                            <span class="flash">{{row.finance[row.financeYear].volume | number }}</span>
+                          </p>
                           <div class="row">
                             <div class="col-sm-6">
-                              <p ng-if="row.finance[row.financeYear].income_gov_pct"><strong>שיעור הכנסות מרשויות: </strong>{{row.finance[row.financeYear].income_gov_pct}}%</p>
-                              <p ng-if="row.finance[row.financeYear].income_phil_pct"><strong>שיעור הכנסות מפילנתרופיה:</strong>{{row.finance[row.financeYear].income_phil_pct}}%</p>
-                              <p ng-if="row.finance[row.financeYear].income_equiv_pct"><strong>שיעור הכנסות בשווי ערך: </strong>{{row.finance[row.financeYear].income_equiv_pct}}%</p>
-                              <p ng-if="row.finance[row.financeYear].income_internal_pct"><strong>שיעור הכנסות עצמיות: </strong>{{row.finance[row.financeYear].income_internal_pct}}%</p>
+                              <p ng-if="row.finance[row.financeYear].income_gov_pct">
+                                <strong>שיעור הכנסות מרשויות: </strong>
+                                <span class="flash">{{row.finance[row.financeYear].income_gov_pct}}%</span>
+                              </p>
+                              <p ng-if="row.finance[row.financeYear].income_phil_pct">
+                                <strong>שיעור הכנסות מפילנתרופיה:</strong>
+                                <span class="flash">{{row.finance[row.financeYear].income_phil_pct}}%</span>
+                              </p>
+                              <p ng-if="row.finance[row.financeYear].income_equiv_pct">
+                                <strong>שיעור הכנסות בשווי ערך: </strong>
+                                <span class="flash">{{row.finance[row.financeYear].income_equiv_pct}}%</span>
+                              </p>
+                              <p ng-if="row.finance[row.financeYear].income_internal_pct">
+                                <strong>שיעור הכנסות עצמיות: </strong>
+                                <span class="flash">{{row.finance[row.financeYear].income_internal_pct}}%</span>
+                              </p>
                             </div>
                             <div class="col-sm-6">
-                              <p ng-if="row.finance[row.financeYear].spending_admin_pct"><strong>שיעור הוצאות הנה"כ, כולל גיוס משאבים: </strong>{{row.finance[row.financeYear].spending_admin_pct}}%</p>
+                              <p ng-if="row.finance[row.financeYear].spending_admin_pct">
+                                <strong>שיעור הוצאות הנה"כ, כולל גיוס משאבים: </strong>
+                                <span class="flash">{{row.finance[row.financeYear].spending_admin_pct}}%</span>
+                              </p>
                             </div>
                           </div>
                         </span>
@@ -316,8 +335,6 @@
 
 
     </div>
-    <div class="hasadna-logo" ng-click="main.hasadna()">פיתוח האתר:</div>
-    <div class="bluedot-logo" ng-click="main.bluedot()">מיתוג, עיצוב, UX: </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
