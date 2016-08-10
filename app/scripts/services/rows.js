@@ -16,7 +16,7 @@ angular.module('midotApp')
         resolve(JSON.parse($window.localStorage.data));
       } else {
         Tabletop.then(function(t) {
-          var sheet = 'amutot-with-2014';
+          var sheet = 'amutot-multiple-years';
           var data = {
             amutot: t[0][sheet].elements.slice(1),
             columns: t[0][sheet].column_names,
