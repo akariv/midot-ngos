@@ -26,7 +26,7 @@ angular.module('midotApp')
             //  return [d.subject.trim(), d.text];
             //}))
           };
-          data.headers = _.map(t[0].amutot.column_names, function(h) {
+          data.headers = _.map(t[0][sheet].column_names, function(h) {
             return data.headers[h];
           });
           console.log(t);
