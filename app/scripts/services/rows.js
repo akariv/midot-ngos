@@ -29,7 +29,7 @@ angular.module('midotApp')
           data.headers = _.map(t[0][sheet].column_names, function(h) {
             return data.headers[h];
           });
-          console.log(t);
+          var curYear = (new Date()).getFullYear();
           data.amutot = _.map(data.amutot, function(row) {
             row = _.mapObject(row, function(val) {
               val = val.trim();
@@ -66,16 +66,15 @@ angular.module('midotApp')
             row.financeYears = _.sortBy(_.keys(row.finance));
             row.financeYear = ""+maxYear;
             _.extend(row, row.finance[maxYear]);
-            row.age = parseInt(row.age);
             row.found_year = parseInt(row.found_year);
             row.reg_year = parseInt(row.reg_year);
-            row.year = row.reg_year?
-              (row.found_year?
-                ((row.found_year < row.reg_year) ? row.found_year : row.reg_year) : row.reg_year)
-              :
-              (row.found_year?
-                row.found_year:
-                null);
+            row.year =
+              (!!row.reg_year && !!row.found_year) && _.min([row.reg_year,row.found_year]) ||
+              !!row.reg_year && row.reg_year ||
+              !!row.found_year && row.found_year ||
+              null;
+
+            row.age = row.year ? curYear - row.year : null;
             return row;
           });
           if ( $window.localStorage ) {
