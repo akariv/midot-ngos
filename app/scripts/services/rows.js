@@ -68,12 +68,9 @@ angular.module('midotApp')
             _.extend(row, row.finance[maxYear]);
             row.found_year = parseInt(row.found_year);
             row.reg_year = parseInt(row.reg_year);
-            row.year =
-              (!!row.reg_year && !!row.found_year) && _.min([row.reg_year,row.found_year]) ||
-              !!row.reg_year && row.reg_year ||
-              !!row.found_year && row.found_year ||
-              null;
-
+            if (!row.found_year) { row.found_year = row.reg_year; }
+            if (!row.reg_year) { row.reg_year = row.found_year; }
+            row.year = _.min([row.reg_year,row.found_year]);
             row.age = row.year ? curYear - row.year : null;
             return row;
           });
